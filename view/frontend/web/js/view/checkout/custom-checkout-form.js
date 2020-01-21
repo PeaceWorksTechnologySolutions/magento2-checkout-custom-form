@@ -26,7 +26,9 @@ define([
             var self = this;
             this._super();
             formData = this.source.get('customCheckoutForm');
-            var formDataCached = cartCache.get('custom-form');
+            var quoteId = quote.getQuoteId();
+            var key = 'custom-form' + quoteId;
+            var formDataCached = cartCache.get(key);
             if (formDataCached) {
                 formData = this.source.set('customCheckoutForm', formDataCached);
             }
@@ -78,7 +80,8 @@ define([
                     async: true
                 }).done(
                     function (response) {
-                        cartCache.set('custom-form', formData);
+                        var key = 'custom-form' + quoteId;
+                        cartCache.set(key, formData);
                         result = true;
                     }
                 ).fail(

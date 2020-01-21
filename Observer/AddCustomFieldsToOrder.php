@@ -54,5 +54,8 @@ class AddCustomFieldsToOrder implements ObserverInterface
             CustomFieldsInterface::CHECKOUT_COMMENT,
             $quote->getData(CustomFieldsInterface::CHECKOUT_COMMENT)
         );
+        $order->setCustomerNote(
+            $quote->getCustomerNote() . "\n----\n" . $quote->getData(CustomFieldsInterface::CHECKOUT_COMMENT)
+        );
     }
 }
