@@ -33,4 +33,20 @@ class OrderRepository
         return $order;
     }
 
+    public function afterGetList(\Magento\Sales\Api\OrderRepositoryInterface $subject,
+                                 \Magento\Sales\Api\Data\OrderSearchResultInterface $searchResult)
+    {
+        $orders = $searchResult->getItems();
+
+        foreach ($orders as &$order) {
+            $checkout_purchase_order_no = $order->getData(self::FIELD_NAME);
+            $extensionAttributes = $order->getExtensionAttributes();
+            $extensionAttributes = $extensionAttributes ? $extensionAttributes : $this->extensionFactory->create();
+            $extensionAttributes->setCheckoutPurchaseOrderNo($checkout_purchase_order_no);
+            $order->setExtensionAttributes($extensionAttributes);
+        }
+
+        return $searchResult;
+    }
+
 }
