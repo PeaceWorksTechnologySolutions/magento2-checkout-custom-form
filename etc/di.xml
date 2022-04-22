@@ -3,4 +3,8 @@
     <preference for="Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface" type="Bodak\CheckoutCustomForm\Model\Data\CustomFields" />
     <preference for="Bodak\CheckoutCustomForm\Api\CustomFieldsRepositoryInterface" type="Bodak\CheckoutCustomForm\Model\CustomFieldsRepository" />
     <preference for="Bodak\CheckoutCustomForm\Api\CustomFieldsGuestRepositoryInterface" type="Bodak\CheckoutCustomForm\Model\CustomFieldsGuestRepository" />
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="checkout_purchase_order_no" type="Bodak\CheckoutCustomForm\Plugin\Magento\Sales\Model\OrderRepository"/>
+    </type>
 </config>
